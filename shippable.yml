@@ -25,4 +25,4 @@ build:
         #- composer self-update
         #- composer install --prefer-dist
         # Run CI
-        - $SHIPPABLE_BUILD_DIR/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage -c test/
+        #- $SHIPPABLE_BUILD_DIR/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage -c test/
