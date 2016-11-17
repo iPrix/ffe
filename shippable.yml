@@ -22,7 +22,7 @@ build:
         # Make sure we don't have unwanted items in the cache
         - git clean -f -d
         # Install dependencies
-        - composer self-update
-        - composer install --prefer-dist
+        #- composer self-update
+        #- composer install --prefer-dist
         # Run CI
         - $SHIPPABLE_BUILD_DIR/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage -c test/
