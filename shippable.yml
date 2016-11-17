@@ -1,0 +1,28 @@
+language: php
+
+php:
+  - 5.6
+  - 7.0
+
+matrix:
+    allow_failures:
+        - php: 7.0
+
+build:
+    pre_ci_boot:
+        options: '--privileged=true'
+    # Cache dependencies and git folder
+    cache: true
+    cache_dir_list:
+        - $SHIPPABLE_BUILD_DIR/vendor
+        - $SHIPPABLE_BUILD_DIR/.git
+    ci:
+        # Set a timezone for PHP
+        - echo "date.timezone = 'Europe/London'" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+        # Make sure we don't have unwanted items in the cache
+        - git clean -f -d
+        # Install dependencies
+        - composer self-update
+        - composer install --prefer-dist
+        # Run CI
+        - $SHIPPABLE_BUILD_DIR/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage -c test/
